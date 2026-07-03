@@ -36,4 +36,11 @@ export interface BalkanNode {
   mid?: number;
   pids?: number[];
   gender: string;
+  birth_date?: string;
+  birth_location?: string;
+  bio?: string;
+}
+
+export interface PersonSidePanelProps {
+  person: BalkanNode | null;
 }
