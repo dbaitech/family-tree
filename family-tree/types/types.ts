@@ -8,6 +8,7 @@ export interface Person {
   gender: "Male" | "Female" | "Unknown";
   birth_date: string | null;
   birth_location: string | null;
+  is_living: boolean | null;
   death_date: string | null;
   death_location: string | null;
   bio: string | null;
@@ -32,12 +33,16 @@ export interface ChildRelationship {
 export interface BalkanNode {
   id: number;
   name: string;
+  maiden_name: string | null;
   fid?: number;
   mid?: number;
   pids?: number[];
   gender: string;
   birth_date?: string;
   birth_location?: string;
+  is_living: boolean | null;
+  death_date: string | null;
+  death_location: string | null;
   bio?: string;
 }
 

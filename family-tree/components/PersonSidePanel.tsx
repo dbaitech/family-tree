@@ -25,8 +25,15 @@ export default function PersonSidePanel({
         <h2 className="text-xl font-bold">{person.name}</h2>
       </div>
 
-      {/* Content */}
-      <div className="p-4">
+      <div className="p-4 space-y-4">
+        {/* Maiden name (only if exists) */}
+        {person.maiden_name && (
+          <p>
+            <strong>Maiden Name:</strong> {person.maiden_name}
+          </p>
+        )}
+
+        {/* Birth info */}
         <p>
           <strong>Birth Date:</strong> {person.birth_date}
         </p>
@@ -35,9 +42,28 @@ export default function PersonSidePanel({
           <strong>Birth Location:</strong> {person.birth_location}
         </p>
 
-        <p className="mt-4 font-bold">Biography</p>
+        {/* Death info (only if NOT living) */}
+        {!person.is_living && (
+          <>
+            {person.death_date && (
+              <p>
+                <strong>Death Date:</strong> {person.death_date}
+              </p>
+            )}
 
-        <p className="mt-2">{person.bio}</p>
+            {person.death_location && (
+              <p>
+                <strong>Death Location:</strong> {person.death_location}
+              </p>
+            )}
+          </>
+        )}
+
+        {/* Biography */}
+        <div>
+          <p className="font-bold">Biography</p>
+          <p className="mt-2">{person.bio}</p>
+        </div>
       </div>
     </div>
   );
