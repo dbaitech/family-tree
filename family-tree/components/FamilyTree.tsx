@@ -123,9 +123,10 @@ export default function FamilyTree() {
       <div ref={treeRef} className="h-full w-full" />
 
       {selectedPerson && (
-        <div className="absolute right-0 top-0 h-full w-80 bg-white border-l shadow-lg overflow-y-auto">
-          <PersonSidePanel person={selectedPerson} />
-        </div>
+        <PersonSidePanel
+          person={selectedPerson}
+          onClose={() => setSelectedPerson(null)}
+        />
       )}
     </div>
   );
