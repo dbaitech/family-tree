@@ -1,8 +1,25 @@
+import styles from "./PersonSidePanel.module.css";
 import type { BalkanNode } from "@/types/types";
 
 interface PersonSidePanelProps {
   person: BalkanNode | null;
   onClose: () => void;
+}
+
+interface FieldProps {
+  label: string;
+  value?: string | null;
+}
+
+function Field({ label, value }: FieldProps) {
+  if (!value) return null;
+
+  return (
+    <div className={styles.card}>
+      <p className={styles.label}>{label}</p>
+      <p className={styles.value}>{value}</p>
+    </div>
+  );
 }
 
 export default function PersonSidePanel({
@@ -12,59 +29,52 @@ export default function PersonSidePanel({
   if (!person) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-white overflow-y-auto">
-      {/* Header */}
-      <div className="flex items-center gap-3 border-b p-4">
-        <button
-          onClick={onClose}
-          className="text-xl font-bold px-2 py-1 hover:bg-gray-100 rounded"
-        >
+    <div className={styles.panel}>
+      <header className={styles.header}>
+        <button onClick={onClose} className={styles.backButton}>
           ←
         </button>
 
-        <h2 className="text-xl font-bold">{person.name}</h2>
-      </div>
+        <div className={styles.profile}>
+          <div className={styles.avatar}>{person.name.charAt(0)}</div>
 
-      <div className="p-4 space-y-4">
-        {/* Maiden name (only if exists) */}
-        {person.maiden_name && (
-          <p>
-            <strong>Maiden Name:</strong> {person.maiden_name}
-          </p>
-        )}
+          <h1 className={styles.name}>{person.name}</h1>
 
-        {/* Birth info */}
-        <p>
-          <strong>Birth Date:</strong> {person.birth_date}
-        </p>
-
-        <p>
-          <strong>Birth Location:</strong> {person.birth_location}
-        </p>
-
-        {/* Death info (only if NOT living) */}
-        {!person.is_living && (
-          <>
-            {person.death_date && (
-              <p>
-                <strong>Death Date:</strong> {person.death_date}
-              </p>
-            )}
-
-            {person.death_location && (
-              <p>
-                <strong>Death Location:</strong> {person.death_location}
-              </p>
-            )}
-          </>
-        )}
-
-        {/* Biography */}
-        <div>
-          <p className="font-bold">Biography</p>
-          <p className="mt-2">{person.bio}</p>
+          {person.maiden_name && (
+            <p className={styles.subtitle}>née {person.maiden_name}</p>
+          )}
         </div>
-      </div>
+      </header>
+
+      <main className={styles.content}>
+        <section>
+          <h2 className={styles.sectionTitle}>Life</h2>
+
+          <div className={styles.grid}>
+            <Field label="Birth Date" value={person.birth_date} />
+
+            <Field label="Birth Location" value={person.birth_location} />
+
+            {!person.is_living && (
+              <>
+                <Field label="Death Date" value={person.death_date} />
+
+                <Field label="Death Location" value={person.death_location} />
+              </>
+            )}
+          </div>
+        </section>
+
+        {person.bio && (
+          <section>
+            <h2 className={styles.sectionTitle}>Biography</h2>
+
+            <div className={styles.card}>
+              <p className={styles.bio}>{person.bio}</p>
+            </div>
+          </section>
+        )}
+      </main>
     </div>
   );
 }
