@@ -48,7 +48,7 @@ export default function PersonSidePanel({
 
       <main className={styles.content}>
         <section>
-          <h2 className={styles.sectionTitle}>Life</h2>
+          <h2 className={styles.sectionTitle}>Biography</h2>
 
           <div className={styles.grid}>
             <Field label="Birth Date" value={person.birth_date} />
