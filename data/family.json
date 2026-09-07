@@ -39,7 +39,10 @@
     "mid": 4,
     "fid": 5,
     "name": "Helen Summers",
-    "gender": "female"
+    "gender": "female",
+    "birth_date": "November 19th, 1999",
+    "birth_location": "Syracuse, NY, USA",
+    "bio": "Software Engineer. NYU Alumna."
   },
   {
     "id": 7,
